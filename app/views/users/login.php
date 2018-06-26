@@ -14,34 +14,34 @@
                 </div>
 
                 <div class="card-body ">
-                    <form action="<?php echo URLROOT; ?>/users/login" method="post">
+                    <form action="<?php echo URLROOT; ?>/users/login" method="post" class="needs-validation" novalidate>
 
-                        <label class="sr-only" for="Email">Email</label>
+                        <label for="email" class="sr-only">Email</label>
                         <div class="input-group mb-4 mr-sm-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <span class="fa fa-user"></span>
+                                    <span class="fa fa-envelope"></span>
                                 </div>
                             </div>
-                            <input required type="email" class="form-control form-control-lg <?php echo  (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
-                                placeholder="Email" name="email" value="<?php echo $data['email']; ?>">
-                            <span class="inavlid-feedback">
+                            <input name="email" type="email" class="form-control form-control-lg <?php echo  (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
+                                placeholder="Email" value="<?php echo $data['email']; ?>" required>
+                            <div class="invalid-feedback">
                                 <?php echo $data['email_err']; ?>
-                            </span>
+                            </div>
                         </div>
 
-                        <label class="sr-only" for="Password">Password</label>
+                        <label for="password" class="sr-only">Password</label>
                         <div class="input-group mb-4 mr-sm-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <span class="fa fa-key"></span>
                                 </div>
                             </div>
-                            <input required type="password" class="form-control form-control-lg <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>"
-                                placeholder="Password" name="password" value="<?php echo $data['password']; ?>">
-                            <span class="inavlid-feedback">
+                            <input name="password" type="password" class="form-control form-control-lg <?php echo  (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>"
+                                placeholder="Password" value="<?php echo $data['password']; ?>" required>
+                            <div class="invalid-feedback">
                                 <?php echo $data['password_err']; ?>
-                            </span>
+                            </div>
                         </div>
 
                         <div class="form-group">
