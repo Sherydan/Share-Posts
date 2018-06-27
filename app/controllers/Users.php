@@ -1,15 +1,20 @@
 <?php
     class Users extends Controller{
         public function __construct(){
+            # cargo el modelo user para llamar a sus metodos
+            $this->userModel = $this->model('User');
 
         }
 
         public function register(){
+            # si existe un request method post, proceso los datos
+            # en caso contrario, solo muestro la vista
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 # procesar el form
                 # sanitizar post
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 # incializar $data
+                
                 $data = [
                     'name' => trim($_POST['name']),
                     'email' => trim($_POST['email']),
@@ -29,6 +34,11 @@
                 # validar email
                 if (empty($data['email'])) {
                     $data['email_err'] = 'Please enter a email';
+                } else {
+                    # verificar que el email no exista
+                    if($this->userModel->findUserByEmail($data['email'])){
+                        $data['email_err'] = 'Email is already taken';
+                    }
                 }
 
                 # validar password
@@ -47,8 +57,19 @@
 
                 # verificar que no hayan errores
                 if (empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
-                    die('Success');
+                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                    # registro al usuariio
+                    # funcionn register devuelve true o false, dependiendo si hubo errores o no al ingresar el usuario
+                    if ($this->userModel->register($data)) {
+                        # con mi helper, redirecciono al login
+                        redirect('users/login');
+                    } else {
+                        die('something went wrong');
+                    }
+                    
                 } else {
+                    # en caso que no se haya submiteado el form, simplemente cargo la vista
                     $this->view('users/register', $data);
                 }
                 
@@ -85,15 +106,6 @@
                  # validar email
                  if (empty($data['email'])) {
                     $data['email_err'] = 'Please enter a email';
-                }
-
-
-
-                # validar confirmar password
-                if (empty($data['confirm_password'])) {
-                    $data['confirm_password_err'] = 'Please re enter your password';
-                } elseif ($data['password'] != $data['confirm_password']) {
-                    $data['confirm_password_err'] = 'Password do not match';
                 }
 
                 # validar password

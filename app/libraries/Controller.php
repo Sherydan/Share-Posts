@@ -5,8 +5,8 @@ class Controller{
      * permite cargar modelos y vistas
      */
 
-    # function model es llamada desde el controlador default pages
-    # de esta manera, pages puede llamar un modelo
+    # function model es llamada desde el controlador
+    # que a su vez puede llamar un modelo
     public function model($model){
         # cargar el modelo
         require_once('../app/models/'. $model . '.php');

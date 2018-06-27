@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="<?php echo URLROOT; ?>/users/register" method="post" class="needs-validation" novalidate>
+                    <form action="<?php echo URLROOT; ?>/users/register" method="POST" novalidate>
                         <label for="name" class="sr-only">Name</label>
                         <div class="input-group mb-4 mr-sm-2">
                             <div class="input-group-prepend">
