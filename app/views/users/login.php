@@ -2,6 +2,7 @@
 
 <div class="row mt-5">
     <div class="col-md-6 mx-auto">
+        <?php flash('register_success') ?>
         <div class="border-aqua">
             <div class="card">
                 <div class="card-header bg-aqua">
@@ -15,7 +16,7 @@
 
                 <div class="card-body ">
                     <form action="<?php echo URLROOT; ?>/users/login" method="post" class="needs-validation" novalidate>
-
+                        
                         <label for="email" class="sr-only">Email</label>
                         <div class="input-group mb-4 mr-sm-2">
                             <div class="input-group-prepend">

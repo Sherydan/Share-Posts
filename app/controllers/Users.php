@@ -62,6 +62,7 @@
                     # registro al usuariio
                     # funcionn register devuelve true o false, dependiendo si hubo errores o no al ingresar el usuario
                     if ($this->userModel->register($data)) {
+                        flash('register_success', 'You are now registered');
                         # con mi helper, redirecciono al login
                         redirect('users/login');
                     } else {
@@ -102,10 +103,14 @@
                     'email_err' => '',
                     'password_err' => '',
                 ];
+                
+                # chequear email en la bd
+                if ($this->userModel->findUserByEmail($data['email'])) {
+                    # usuario encontrado
 
-                 # validar email
-                 if (empty($data['email'])) {
-                    $data['email_err'] = 'Please enter a email';
+                } else {
+                    # usuario no encontrado
+                    $data['email_err'] = 'User not found';
                 }
 
                 # validar password
@@ -116,8 +121,24 @@
                 }
 
                  # verificar que no hayan errores
-                 if (empty($data['email_err']) && empty($data['password_err'])) {
-                    die('Success');
+                if (empty($data['email_err']) && empty($data['password_err'])) {
+                    # validado
+                    # chequear y setear el usuario
+                    # llamo a la funcion login del modelo, que verifica datos y devuelve false en caso de incorrecto o 
+                    # devuelve el arreglo con los datos en caso de correcto
+                    $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+
+
+                    if ($loggedInUser) {
+                        # setear variables de sesion
+                        # como $loggedInUser devuelve datos, seteo la session
+                        $this->createUserSession($loggedInUser);
+                    } else {
+                        # login incorrecto
+                        # seteo el error e inmediatamente cargo la vista 
+                        $data['password_err'] = 'Incorrect password';
+                        $this->view('users/login', $data);
+                    }
                 } else {
                     $this->view('users/login', $data);
                 }
@@ -135,6 +156,35 @@
                 $this->view('users/login', $data);
             }
         }
+
+        private function createUserSession($user){
+            # una vez validado el login, creo la sesion
+            $_SESSION['user_id'] = $user->id;
+            $_SESSION['user_email'] = $user->email;
+            $_SESSION['user_nombre'] = $user->nombre;
+
+            # redirecciono al index una vez creada
+            redirect('pages/index');
+        }
+
+        public function logout(){
+        
+            unset($_SESSION['user_id']);
+            unset($_SESSION['user_email']);
+            unset($_SESSION['user_password']);
+            session_destroy();
+
+            redirect('users/login');
+        }
+
+        public function isLoggedIn(){
+            # funcion para verificar que el usuario este logeado pa realizar ciertas acciones
+            if (isset($_SESSION['user_id'])) {
+                return true;
+            } else {
+                return false;
+            }
+        } 
 
         # en caso de que en la url se llame a /users/ y no se le de ningun metodo
         # automaticamente redirecciono al index

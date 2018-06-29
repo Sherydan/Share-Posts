@@ -4,6 +4,7 @@
 
     # Cargar Helpers
     require_once('../app/helpers/url_helper.php');
+    require_once('../app/helpers/session_helper.php');
     
     # Cargar automaticamente todas las librerias
     spl_autoload_register(function($className){

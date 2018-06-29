@@ -7,7 +7,7 @@
             $this->db = new Database;
         }
     
-        // Find user by email
+        # encontrar el usuario en la base de datos
         public function findUserByEmail($email){
             $this->db->query('SELECT * FROM users WHERE email = :email');
             $this->db->bind(':email', $email);
@@ -22,15 +22,37 @@
             }
         }
 
+        # registrar usuario
         public function register($data){
             $this->db->query('INSERT INTO users (email, name, password) VALUES(:email, :name, :password)');
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':password', $data['password']);
 
+            # dependiendo si todo sale bien, retorno true o false
             if ($this->db->execute()) {
                 return true;
             } else {
+                return false;
+            }
+        }
+
+        public function login($email, $password){
+            # selecciono la fila completa con los datos
+            # en este punto, el email ya esta verificado
+            $this->db->query('SELECT * FROM users WHERE email = :email');
+            $this->db->bind(':email', $email);
+
+            $row = $this->db->single();
+
+            $hashedPassword = $row->password;
+
+            # comparar la pass en texto plano con la que esta en la db 
+            if (password_verify($password, $hashedPassword)) {
+                # retorno los datos de sesion
+                return $row;
+            } else {
+                # retorno falso en caso de datos incorrectos
                 return false;
             }
         }
