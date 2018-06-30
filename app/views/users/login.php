@@ -2,7 +2,10 @@
 
 <div class="row mt-5">
     <div class="col-md-6 mx-auto">
-        <?php flash('register_success') ?>
+        <!-- MENSAJES FLASH -->
+        <?php flash('user_not_allowed'); ?>
+        <?php flash('register_success'); ?>
+        <!-- FIN MENSAJES FLASH -->
         <div class="border-aqua">
             <div class="card">
                 <div class="card-header bg-aqua">

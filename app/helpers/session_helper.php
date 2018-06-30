@@ -33,4 +33,13 @@
 
     }
 
+    function isLoggedIn(){
+        # funcion para verificar que el usuario este logeado pa realizar ciertas acciones
+        if (isset($_SESSION['user_id'])) {
+            return true;
+        } else {
+            return false;
+        }
+    } 
+
 ?>

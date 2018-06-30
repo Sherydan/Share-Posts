@@ -163,8 +163,8 @@
             $_SESSION['user_email'] = $user->email;
             $_SESSION['user_nombre'] = $user->nombre;
 
-            # redirecciono al index una vez creada
-            redirect('pages/index');
+            # redirecciono posts
+            redirect('posts');
         }
 
         public function logout(){
@@ -177,14 +177,7 @@
             redirect('users/login');
         }
 
-        public function isLoggedIn(){
-            # funcion para verificar que el usuario este logeado pa realizar ciertas acciones
-            if (isset($_SESSION['user_id'])) {
-                return true;
-            } else {
-                return false;
-            }
-        } 
+        
 
         # en caso de que en la url se llame a /users/ y no se le de ningun metodo
         # automaticamente redirecciono al index
