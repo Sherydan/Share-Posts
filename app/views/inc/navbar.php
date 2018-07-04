@@ -24,7 +24,7 @@
         <!-- Verifico si existe una session o no, asi se si mostrar login o logout -->
         <?php if(isset($_SESSION['user_id'])) : ?>
         <li class="nav-item">
-                <a href="#" class="nav-link">Welcome <?php echo $_SESSION['user_name'];  ?></a>
+                <a href="<?php echo URLROOT; ?>/users/profile/<?php echo $_SESSION['user_id']; ?>" class="nav-link">Welcome <?php echo $_SESSION['user_name'];  ?></a>
               </li>
           <li class="nav-item">
                 <a href="<?php echo URLROOT; ?>/users/logout" class="nav-link">Logout <i class="fas fa-sign-out-alt"></i>

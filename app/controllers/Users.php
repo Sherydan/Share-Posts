@@ -186,6 +186,12 @@
             header("Location:". URLROOT);
             
         }
+
+        public function profile($id){
+            $data = [];
+
+            $this->view('users/profile', $data);
+        }
     }
 
 ?>

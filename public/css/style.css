@@ -32,8 +32,24 @@
 }
 
 .bg-light-aqua{
-    background-color: #d1ddea;
+    background-color: #d1ddea !important;
 }
+
+.bg-green{
+    background: #6f8f52;
+}
+
+
+
+
+#status-card{
+    
+   
+    background-color: rgb(221, 221, 221);
+    border-radius: 10px;
+}
+
+
 
 
 
