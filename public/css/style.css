@@ -25,5 +25,17 @@
     border: 1px rgb(221, 245, 252) solid;
 }
 
+#main-form-add{
+    -webkit-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+}
+
+.bg-light-aqua{
+    background-color: #d1ddea;
+}
+
+
+
 
 

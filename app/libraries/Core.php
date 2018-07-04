@@ -7,6 +7,12 @@
     */
 
     class Core {
+
+        /* 
+         * las propiedades controller y method empiezan
+         * con un valor por default para que en caso que no se ecuentren,
+         * se carga el controller y el metodo por defecto
+         */ 
         protected $currentController = 'Pages';
         protected $currentMethod = 'index';
         protected $params = [];

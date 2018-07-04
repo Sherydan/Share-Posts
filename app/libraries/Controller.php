@@ -11,7 +11,7 @@ class Controller{
         # cargar el modelo
         require_once('../app/models/'. $model . '.php');
 
-        # instancear el modelo
+        # retornar instancea del modelo
         return new $model();
     }
     

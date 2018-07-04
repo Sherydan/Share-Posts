@@ -1,7 +1,10 @@
 <?php require_once(APPROOT. '/views/inc/header.php'); ?>
     <div class="container">
-        <div class="row">
+    <?php flash('post_message'); ?>
+
+        <div class="row mb-3">
             <div class="col-md-6">
+                
                 <h1>Posts</h1>
             </div>
 
@@ -20,7 +23,7 @@
                 <div class="card-body">
                     <p class="card-text"><?php echo $post->body; ?></p>
                     <div class="text-center">
-                    <a href="<?php echo URLROOT; ?>/post/show/<?php echo $post->postId; ?>" class="btn btn-dark btn-lg btn-block">More</a>
+                    <a href="<?php echo URLROOT; ?>/posts/show/<?php echo $post->postId; ?>" class="btn btn-dark btn-lg btn-block">More</a>
                     </div>
                     
                 </div>

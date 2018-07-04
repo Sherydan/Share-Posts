@@ -23,8 +23,13 @@
         <ul class="navbar-nav ml-auto">
         <!-- Verifico si existe una session o no, asi se si mostrar login o logout -->
         <?php if(isset($_SESSION['user_id'])) : ?>
+        <li class="nav-item">
+                <a href="#" class="nav-link">Welcome <?php echo $_SESSION['user_name'];  ?></a>
+              </li>
           <li class="nav-item">
-                <a href="<?php echo URLROOT; ?>/users/logout" class="nav-link">Logout</a>
+                <a href="<?php echo URLROOT; ?>/users/logout" class="nav-link">Logout <i class="fas fa-sign-out-alt"></i>
+
+</a>
               </li>
 
         <?php else : ?>
@@ -33,7 +38,9 @@
             </li>
 
              <li class="nav-item">
-              <a href="<?php echo URLROOT; ?>/users/login" class="nav-link">Login</a>
+              <a href="<?php echo URLROOT; ?>/users/login" class="nav-link">Login <i class="fas fa-sign-in-alt"></i>
+
+</a>
             </li>
 
         <?php endif ?>    

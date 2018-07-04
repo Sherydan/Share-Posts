@@ -1,7 +1,7 @@
 <?php
     class Users extends Controller{
         public function __construct(){
-            # cargo el modelo user para llamar a sus metodos
+            # instanceo el modelo user para llamar a sus metodos
             $this->userModel = $this->model('User');
 
         }
@@ -161,7 +161,7 @@
             # una vez validado el login, creo la sesion
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_email'] = $user->email;
-            $_SESSION['user_nombre'] = $user->nombre;
+            $_SESSION['user_name'] = $user->name;
 
             # redirecciono posts
             redirect('posts');
@@ -171,7 +171,7 @@
         
             unset($_SESSION['user_id']);
             unset($_SESSION['user_email']);
-            unset($_SESSION['user_password']);
+            unset($_SESSION['user_name']);
             session_destroy();
 
             redirect('users/login');
