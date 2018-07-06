@@ -41,6 +41,7 @@
             }
         }
 
+
         public function showPostById($id){
             $this->db->query('SELECT * FROM posts WHERE id = :id');
             $this->db->bind(':id', $id);
@@ -76,6 +77,18 @@
             } else {
                 return false;
             }
+        }
+
+        public function getPostsByUser($id){
+            $this->db->query('SELECT * FROM posts WHERE posts.user_id = :id');
+            $this->db->bind(':id', $id);
+            $posts = [];
+            if ($this->db->execute()) {
+                $posts = $this->db->resultSet();
+                return $posts;
+            }
+
+            return $posts;
         }
 
         

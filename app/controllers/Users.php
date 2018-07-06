@@ -3,6 +3,9 @@
         public function __construct(){
             # instanceo el modelo user para llamar a sus metodos
             $this->userModel = $this->model('User');
+            $this->postModel = $this->model('Post');
+
+           
 
         }
 
@@ -187,10 +190,41 @@
             
         }
 
-        public function profile($id){
-            $data = [];
+        public function profile($id = null){
+            $user = $this->userModel->getUserById($id);
+            $posts = $this->postModel->getPostsByUser($id);
+            $quantity = count($posts);
 
-            $this->view('users/profile', $data);
+            if (!empty($user)) {
+                $data = [
+                    'user' => $user,
+                    'quantity' => $quantity
+                ];
+    
+                $this->view('users/profile', $data);
+            } else {
+                redirect('posts');
+            }
+
+            
+        }
+
+        public function edit($id = null){
+            if (!empty($id)) {
+                if (!isLoggedIn()) {
+                    redirect('pages');
+                } elseif ($id != $_SESSION['user_id']) {
+                    redirect('posts');
+                }
+
+                $data = [];
+
+                $this->view('users/edit_profile', $data);
+            } else {
+                redirect('pages');
+            }
+            
+           
         }
     }
 

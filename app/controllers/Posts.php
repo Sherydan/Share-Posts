@@ -16,6 +16,7 @@
         
         public function index(){
             $posts = $this->postModel->getPosts();
+            
             $data = ['posts' => $posts];
             $this->view('posts/index', $data);
         }
@@ -61,13 +62,16 @@
                 
             }
 
-            
-           
         }
 
         public function show($id){
             
+            # tomo la id que viene desde la url y cargo el post
             $post = $this->postModel->showPostById($id);
+            # cargo el usuario que creo el post
+            # como los posts no contienen info del usuario, cargo el modelo de usuaruios
+            # y tomo al usuario que creo el post seleccionado
+            # tambien podria solo cargarse el modelo post y hacer un inner join en la consulta
             $user = $this->userModel->getUserById($post->user_id);
 
             $data = [

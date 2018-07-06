@@ -3,15 +3,20 @@
 
     <div class="row">
         <div class="col col-lg-12 col-md-12 col-12">
-            <a href="#" class="btn btn-info float-right">Edit Profile
-                <i class="fas fa-edit"></i>
-            </a>
+   
+             <?php if ($data['user']->id == $_SESSION['user_id']) : ?>
+                <a href="<?php echo URLROOT; ?>/users/edit/<?php echo $_SESSION['user_id'] ?>" class="btn btn-info float-right">Edit Profile
+                    <i class="fas fa-edit"></i>
+                </a>
+                <?php endif; ?>
+            
         </div>
     </div>
 
     <div class="row mb-2">
         <div class="col col-lg-3 col-md-3 col-4">
             <div class="text-center">
+                
                 <img src="<?php echo URLROOT; ?>/img/default_profile.png" class="img-thumbnail" alt="">
 
                 <a href="#" class="d-block">0 Warning Post</a>
@@ -20,7 +25,7 @@
 
         <div class="col col-lg-2 col-md-3 col-8">
             <h1>
-                <?php echo ucwords($_SESSION['user_name']); ?>
+                <?php echo ucwords($data['user']->name); ?>
             </h1>
             <p>Member since: </p>
             <p>
@@ -54,6 +59,7 @@
     </div>
 
     <div class="row">
+        
         <div class="col col-md-3 col-sm-3 col-3">
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-overview-list" data-toggle="list" href="#list-overview"
@@ -82,29 +88,29 @@
 
                                 <div class="card-body">
                                     <dl class="row ">
-                                        <dt class="col col-md-6 col-lg-3 col-4 ">Group</dt>
-                                        <dd class="col col-md-6 col-lg-9 col-8">Members</dd>
+                                        <dt class="col col-md-6 col-lg-4 col-6 ">Group</dt>
+                                        <dd class="col col-md-6 col-lg-8 col-6">Members</dd>
 
-                                        <dt class="col col-md-6 col-lg-3 col-4">Active Posts</dt>
-                                        <dd class="col col-md-6 col-lg-9 col-8">318</dd>
+                                        <dt class="col col-md-6 col-lg-4 col-6">Active Posts</dt>
+                                        <dd class="col col-md-6 col-lg-8 col-6"><?php echo $data['quantity']; ?></dd>
 
-                                        <dt class="col col-md-6 col-lg-3 col-4">Profile Views</dt>
-                                        <dd class="col col-md-6 col-lg-9 col-8">3959</dd>
+                                        <dt class="col col-md-6 col-lg-4 col-6">Profile Views</dt>
+                                        <dd class="col col-md-6 col-lg-8 col-6">3959</dd>
 
-                                        <dt class="col col-md-6 col-lg-3 col-4">Member Title</dt>
-                                        <dd class="col col-md-6 col-lg-9 col-8">Expert</dd>
+                                        <dt class="col col-md-6 col-lg-4 col-6">Member Title</dt>
+                                        <dd class="col col-md-6 col-lg-8 col-6">Expert</dd>
 
-                                        <dt class="col col-md-6 col-lg-3 col-4">Age</dt>
-                                        <dd class="col col-md-6 col-lg-9 col-8">26 years old</dd>
+                                        <dt class="col col-md-6 col-lg-4 col-6">Age</dt>
+                                        <dd class="col col-md-6 col-lg-8 col-6">26 years old</dd>
 
-                                        <dt class="col col-md-6 col-lg-3 col-4">Birthday</dt>
-                                        <dd class="col col-md-6 col-lg-9 col-8">June 25, 1992</dd>
+                                        <dt class="col col-md-6 col-lg-4 col-6">Birthday</dt>
+                                        <dd class="col col-md-6 col-lg-8 col-6">June 25, 1992</dd>
 
-                                        <dt class="col col-md-6 col-lg-3 col-4">Gender</dt>
-                                        <dd class="col col-md-6 col-lg-9 col-8">Male</dd>
+                                        <dt class="col col-md-6 col-lg-4 col-6">Gender</dt>
+                                        <dd class="col col-md-6 col-lg-8 col-6">Male</dd>
 
-                                        <dt class="col col-md-6 col-lg-3 col-4">Location</dt>
-                                        <dd class="col col-md-6 col-lg-9 col-8">San Fernando</dd>
+                                        <dt class="col col-md-6 col-lg-4 col-6">Location</dt>
+                                        <dd class="col col-md-6 col-lg-8 col-6">San Fernando</dd>
 
                                     </dl>
                                 </div>

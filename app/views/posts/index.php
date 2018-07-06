@@ -29,7 +29,9 @@
                 </div>
 
                 <div class="card-footer text-muted">
-                    Writen By <?php echo $post->name; ?> On <?php echo $post->postCreatedAt; ?>
+                Writen By
+                        <a href="<?php echo URLROOT; ?>/users/profile/<?php echo $post->userId ?>"> <?php echo $post->name; ?></a>
+                      On <?php echo $post->postCreatedAt; ?>
                 </div>
             </div>
 
