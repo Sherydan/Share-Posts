@@ -193,12 +193,15 @@
         public function profile($id = null){
             $user = $this->userModel->getUserById($id);
             $posts = $this->postModel->getPostsByUser($id);
+            $user_settings = $this->userModel->getUserSettings($id);
             $quantity = count($posts);
-
+            $profile_image = !empty($user_settings->path) ? $user_settings->path : '';
             if (!empty($user)) {
+                
                 $data = [
                     'user' => $user,
-                    'quantity' => $quantity
+                    'quantity' => $quantity,
+                    'profile_image' => $user_settings->path
                 ];
     
                 $this->view('users/profile', $data);
@@ -208,7 +211,7 @@
 
             
         }
-
+        /*
         public function edit($id = null){
             if (!empty($id)) {
                 if (!isLoggedIn()) {
@@ -226,6 +229,110 @@
             
            
         }
+        */
+
+        public function edit($id = NULL){
+            if (!empty($id) && $_SESSION['user_id'] == $id) {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    
+                    # ESTO SUCEDERA AL ENVIAR EL SUBMIT DESDE LA PAGINA
+                    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                    $acceptedTypes = ["image/jpeg", "image/png"];
+                    $image = $_FILES['uploadImg'];
+                    $imagename = $_FILES['uploadImg']['name'];
+                    $imagetype = $_FILES['uploadImg']['type'];
+                    $imagetemp = $_FILES['uploadImg']['tmp_name'];
+
+                    
+
+                    $imagePath ='C:/xampp/htdocs/shareposts/public/img/users_img/';
+
+
+
+                    $data = [
+                        'user_id' => $id,
+                        'timezone' => $_POST['timezone'],
+                        'gender' => $_POST['gender'],
+                        'display_name' => $_POST['display_name'],
+                        'image_name' => $imagename,
+                        'timezone_err' => '',
+                        'gender_err' => '',
+                        'display_name_err' => '',
+                        'image_name_err' => ''
+                    ];
+
+                    
+
+                    # validar timezone
+                    if (empty($data['timezone'])) {
+                        $data['timezone_err'] = 'Please select a timezone';
+                    }
+
+                    # validar genero
+                    if (empty($data['gender'])) {
+                        $data['gender_err'] = 'Please select a gender';
+                    }
+
+                    # validar display name
+                    if (empty($data['display_name'])) {
+                        $data['display_name_err'] = 'Please add a display name';
+                    }
+
+                    # validar imagen
+                    if (!empty($_FILES)) {
+                        if(in_array($_FILES['uploadImg']['type'], $acceptedTypes) === false) {
+                           # throw(new InvalidArgumentException("not a valid image"));
+                           $data['image_name_err'] = 'Please select a valid image type';
+                        }
+                    }
+
+                    # verificar que no hayan errores
+                    if (empty($data['timezone_err']) && empty($data['gender_err']) && empty($data['display_name_err']) && empty($data['image_name_err'])) {
+                        
+                        if ($this->userModel->updateSettings($data)) {
+                            if(is_uploaded_file($imagetemp)) {
+                                if(move_uploaded_file($imagetemp, $imagePath . $imagename)) {
+                                    # echo "Sussecfully uploaded your image.";
+                                }
+                                else {
+                                    die('failed to move your image');
+                                }
+                            }
+                            else {
+                                die('failed to upload your image');
+                            }
+
+                            flash('edit_success', 'Profile updated');
+                            redirect('posts');
+                        } else {
+                            die('Something went wrong in the image');
+                        }
+                        
+                    } else {
+                        $this->view('users/edit_profile', $data);
+                    }
+
+                } else {
+                    $data = [
+                        'user_id' => '',
+                        'timezone' => '',
+                        'gender' => '',
+                        'display_name' => '',
+                        'timezone_err' => '',
+                        'gender_err' => '',
+                        'display_name_err' => ''
+                    ];
+
+                    $this->view('users/edit_profile', $data);
+                }
+                
+            } else {
+                redirect('posts');
+            }
+           
+        }
+
+        
     }
 
 ?>

@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="" method="post">
+            <form enctype="multipart/form-data" action="<?php echo URLROOT?>/users/edit/<?php echo $_SESSION['user_id']; ?>" method="post">
 
 
                 <div class="accordion" id="accordionExample">
@@ -31,7 +31,7 @@
                                     <dt class="col-sm-3 m-0">Photo</dt>
                                     <dd class="col-sm-9 m-0">
                                         <div class="form-group">
-                                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                            <input type="file" accept="image/jpeg" class="form-control-file" id="uploadImg" name="uploadImg">
 
                                         </div>
                                     </dd>
@@ -44,7 +44,7 @@
                                     <dd class="col-sm-9">
 
                                         <div class="form-group mb-0">
-                                            <select class="form-control p-2" id="exampleFormControlSelect1">
+                                            <select class="form-control p-2" id="exampleFormControlSelect1" name="timezone">
                                                 <?php foreach ($tzL as $key => $val) : ?>
                                                 <option>
                                                     <?php echo $val; ?>
@@ -165,7 +165,7 @@
 
                                         <div class="form-group">
                                             <label for="gender">Gender</label>
-                                            <select name="" id="" class="form-control ml-1 p-2">
+                                            <select name="gender" id="genderSelector" class="form-control ml-1 p-2">
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
@@ -185,12 +185,30 @@
 
                                     </dd>
 
+                                    <div class="col-12 m-0 p-0">
+                                        <hr>
+                                    </div>
+
+                                    <dt class="col-sm-3 m-0">Display Name</dt>
+                                    <dd class="col-sm-9 m-0">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="displayName">Display Name</label>
+                                                <input type="text" name="display_name" id="display_name" class="form-control">
+
+                                            </div>
 
 
+                                        </div>
+                                    </dd>
 
 
 
                                 </dl>
+
+
+
+
                             </div>
 
 
@@ -217,27 +235,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" id="headingThree">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                                    aria-controls="collapseThree">
-                                    Display Name
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                                non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch
-                                3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                                labore sustainable VHS.
-                            </div>
-                        </div>
-                    </div>
+                   
 
 
                 </div>
@@ -261,4 +259,6 @@
         $('#collapseOne').collapse();
     });
 </script>
+
+
 <?php require_once(APPROOT . '/views/inc/footer.php'); ?>

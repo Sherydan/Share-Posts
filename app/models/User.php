@@ -65,5 +65,34 @@
 
             return $row;
         }
+
+        public function updateSettings($data){
+            
+            $this->db->query('UPDATE users_image SET path = :path WHERE user_id = :id; 
+            UPDATE users_settings SET timezone = :timezone, gender = :gender, display_name = :display_name WHERE user_id = :user_id');
+
+            $this->db->bind(':path', $data['image_name']);
+            $this->db->bind(':id', $data['user_id']);
+            $this->db->bind(':timezone', $data['timezone']);
+            $this->db->bind(':gender', $data['gender']);
+            $this->db->bind(':display_name', $data['display_name']);
+            $this->db->bind(':user_id', $data['user_id']);
+
+            # dependiendo si todo sale bien, retorno true o false
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function getUserSettings($id){
+            $this->db->query('SELECT users.name, users.created_at, users_image.path FROM users INNER JOIN users_image ON users.id = users_image.user_id WHERE users.id = '.$id.'');
+            $this->db->bind(':id', $id);
+            $row = $this->db->single();
+
+            return $row;
+        }
+        
     }
 ?>

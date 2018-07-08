@@ -1,6 +1,5 @@
 <?php
-    function generate_timezone_list()
-    {
+    function generate_timezone_list(){
         static $regions = array(
             DateTimeZone::AFRICA,
             DateTimeZone::AMERICA,
