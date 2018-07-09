@@ -18,7 +18,7 @@
             <div class="text-center">
                 
                 <img src="<?php echo URLROOT; ?><?php echo !empty($data['profile_image']) ? '/img/users_img/'.$data['profile_image'] : '/img/default_profile.png'; ?>" class="img-thumbnail" alt="">
-                <img src="" class="img-thumbnail" alt="">
+                
 
                 <a href="#" class="d-block">0 Warning Post</a>
             </div>

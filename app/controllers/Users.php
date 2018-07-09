@@ -201,7 +201,7 @@
                 $data = [
                     'user' => $user,
                     'quantity' => $quantity,
-                    'profile_image' => $user_settings->path
+                    'profile_image' => $profile_image
                 ];
     
                 $this->view('users/profile', $data);
@@ -211,25 +211,34 @@
 
             
         }
-        /*
-        public function edit($id = null){
-            if (!empty($id)) {
-                if (!isLoggedIn()) {
-                    redirect('pages');
-                } elseif ($id != $_SESSION['user_id']) {
-                    redirect('posts');
+
+        private function validateImage(){
+            $acceptedTypes = ["image/jpeg", "image/png"];
+            $image = $_FILES['uploadImg'];
+            $imagename = $_FILES['uploadImg']['name'];
+            $imagetype = $_FILES['uploadImg']['type'];
+            $imagetemp = $_FILES['uploadImg']['tmp_name'];
+            $error = '';
+
+            if(in_array($_FILES['uploadImg']['type'], $acceptedTypes) === false) {
+                $error = 'Please select a valid image type';
+             }
+
+            /* Process image with GD library */
+            $verifyimg = (!empty($_FILES['uploadImg']['tmp_name'])) ? getimagesize($_FILES['uploadImg']['tmp_name']) : '' ;
+
+            /* Make sure the MIME type is an image */
+            $pattern = "#^(image/)[^\s\n<]+$#i";
+            if (!empty($verifyimg)) {
+                if (!preg_match($pattern, $verifyimg['mime'])) {
+                    $error = 'Only image files are allowed!';
                 }
-
-                $data = [];
-
-                $this->view('users/edit_profile', $data);
-            } else {
-                redirect('pages');
             }
             
-           
+
+            return $error;
         }
-        */
+
 
         public function edit($id = NULL){
             if (!empty($id) && $_SESSION['user_id'] == $id) {
@@ -237,17 +246,15 @@
                     
                     # ESTO SUCEDERA AL ENVIAR EL SUBMIT DESDE LA PAGINA
                     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                    $acceptedTypes = ["image/jpeg", "image/png"];
-                    $image = $_FILES['uploadImg'];
-                    $imagename = $_FILES['uploadImg']['name'];
-                    $imagetype = $_FILES['uploadImg']['type'];
-                    $imagetemp = $_FILES['uploadImg']['tmp_name'];
 
-                    
+                    $image = $_FILES['uploadImg'];
+                    $imagetemp = $_FILES['uploadImg']['tmp_name'];
+                    $path = $_FILES['uploadImg']['name'];
+                    $ext = pathinfo($path, PATHINFO_EXTENSION);
+
+                    $imagename = $id.'.'.$ext;
 
                     $imagePath ='C:/xampp/htdocs/shareposts/public/img/users_img/';
-
-
 
                     $data = [
                         'user_id' => $id,
@@ -280,10 +287,7 @@
 
                     # validar imagen
                     if (!empty($_FILES)) {
-                        if(in_array($_FILES['uploadImg']['type'], $acceptedTypes) === false) {
-                           # throw(new InvalidArgumentException("not a valid image"));
-                           $data['image_name_err'] = 'Please select a valid image type';
-                        }
+                        $data['image_name_err'] = $this->validateImage();
                     }
 
                     # verificar que no hayan errores
@@ -305,7 +309,7 @@
                             flash('edit_success', 'Profile updated');
                             redirect('posts');
                         } else {
-                            die('Something went wrong in the image');
+                            die('Something went wrong on the image');
                         }
                         
                     } else {
@@ -318,9 +322,11 @@
                         'timezone' => '',
                         'gender' => '',
                         'display_name' => '',
+                        'image_name' => '',
                         'timezone_err' => '',
                         'gender_err' => '',
-                        'display_name_err' => ''
+                        'display_name_err' => '',
+                        'image_name_err' => ''
                     ];
 
                     $this->view('users/edit_profile', $data);

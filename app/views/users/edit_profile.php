@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-12">
-            <form enctype="multipart/form-data" action="<?php echo URLROOT?>/users/edit/<?php echo $_SESSION['user_id']; ?>" method="post">
+            <form enctype="multipart/form-data" action="<?php echo URLROOT?>/users/edit/<?php echo $_SESSION['user_id']; ?>" method="post" class="needs-validation" novalidate>
 
 
                 <div class="accordion" id="accordionExample">
@@ -31,8 +31,10 @@
                                     <dt class="col-sm-3 m-0">Photo</dt>
                                     <dd class="col-sm-9 m-0">
                                         <div class="form-group">
-                                            <input type="file" accept="image/jpeg" class="form-control-file" id="uploadImg" name="uploadImg">
-
+                                            <input type="file" accept="image/jpeg" class="form-control-file <?php echo (!empty($data['image_name_err'])) ? 'is-invalid' : '' ?>" id="uploadImg" name="uploadImg">
+                                            <div class="invalid-feedback">
+                                                <?php echo $data['image_name_err']; ?>
+                                            </div>
                                         </div>
                                     </dd>
 
@@ -44,12 +46,15 @@
                                     <dd class="col-sm-9">
 
                                         <div class="form-group mb-0">
-                                            <select class="form-control p-2" id="exampleFormControlSelect1" name="timezone">
+                                            <select class="form-control p-2 <?php echo (!empty($data['timezone_err'])) ? 'is-invalid' : '' ?>" id="exampleFormControlSelect1" name="timezone">
                                                 <?php foreach ($tzL as $key => $val) : ?>
                                                 <option>
                                                     <?php echo $val; ?>
                                                 </option>
                                                 <?php endforeach; ?>
+                                                <div class="invalid-feedback">
+                                                    <?php echo $data['timezone_err']; ?>
+                                                </div>
                                             </select>
                                             <small class="form-text text-muted">The time (including your current adjustment) is: 06 July 2018 - 17:19</small>
                                             <div class="form-check">
@@ -165,10 +170,13 @@
 
                                         <div class="form-group">
                                             <label for="gender">Gender</label>
-                                            <select name="gender" id="genderSelector" class="form-control ml-1 p-2">
+                                            <select name="gender" id="genderSelector" class="form-control ml-1 p-2 <?php echo (!empty($data['gender_err'])) ? 'is-invalid' : '' ?>">
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
+                                            <div class="invalid-feedback">
+                                                <?php echo $data['gender_err']; ?>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
@@ -194,11 +202,11 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <label for="displayName">Display Name</label>
-                                                <input type="text" name="display_name" id="display_name" class="form-control">
-
+                                                <input value="<?php echo $data['display_name']; ?>" type="text" name="display_name" id="display_name" class="form-control <?php echo (!empty($data['display_name_err'])) ? 'is-invalid' : '' ?>">
+                                                <div class="invalid-feedback">
+                                                <?php echo $data['display_name_err']; ?>
                                             </div>
-
-
+                                            </div>
                                         </div>
                                     </dd>
 
