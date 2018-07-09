@@ -1,4 +1,7 @@
-
+*{
+    margin: 0;
+    padding: 0;
+}
 #forgot-pass{
     font-size: 80%;
     position: relative;
@@ -40,15 +43,84 @@
 }
 
 
-
-
 #status-card{
-    
-   
     background-color: rgb(221, 221, 221);
     border-radius: 10px;
 }
 
+#contact_text{
+    width: 30%;
+   
+}
+#contact_form{
+    width: 40%;
+    -webkit-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+    padding: 10px;
+    
+}
+
+#contact_form input::placeholder, #contact_form textarea::placeholder{
+    color: white;
+    opacity: 0.7;
+}
+#contact_form label{
+    color: white;
+    font-size: 1rem;
+    opacity: 0.7;
+    
+}
+
+#contact_form input{
+    color: white;
+}
+
+#contact_form textarea{
+    color: white;
+}
+
+#main_area{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#background_contact{
+    background: url('../img/bg_contact.jpg');
+    height: 100vh;
+    color: rgb(255, 255, 255);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-blend-mode: overlay;
+    background-color: rgba(41, 41, 41, 0.8);
+    background-repeat: no-repeat;
+    
+}
+/* If the browser window is 720px or smaller*/
+@media only screen and (max-width: 720px) {
+    #main_area{
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #contact_text, #contact_form{
+        width: 90%;
+    }
+}
 
 
 

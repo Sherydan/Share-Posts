@@ -26,8 +26,20 @@
 
     <?php require_once(APPROOT. '/views/inc/navbar.php'); ?>
 
+    <?php 
+        $url = "http" . (($_SERVER['SERVER_PORT'] == 443) ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    ?>
+
+    <?php if ($url == 'http://localhost/shareposts/pages/contact') {
+        echo "<div id=\"background_contact\">";
+    } else {
+        echo "<div class=\"container\">";
+    } 
+    ?>
+    
+    
     <!-- Main container start -->
-    <div class="container">
+    
     
     
 

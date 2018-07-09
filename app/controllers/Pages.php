@@ -29,6 +29,12 @@ class Pages extends Controller{
 
 
     }
+
+    public function contact(){
+        $data = [];
+
+        $this->view('pages/contact', $data);
+    }
     
    
 }
