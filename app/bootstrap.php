@@ -6,6 +6,7 @@
     require_once('../app/helpers/url_helper.php');
     require_once('../app/helpers/session_helper.php');
     require_once('../app/helpers/dates.php');
+
     
     # Cargar automaticamente todas las librerias
     spl_autoload_register(function($className){

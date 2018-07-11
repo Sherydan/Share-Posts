@@ -9,6 +9,12 @@
 
         }
 
+        public function sendMail(){
+            require('../helpers/vendor/phpmailer/send_mail.php');
+            
+
+        }
+
         public function register(){
             # si existe un request method post, proceso los datos
             # en caso contrario, solo muestro la vista

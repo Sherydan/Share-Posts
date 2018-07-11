@@ -107,7 +107,7 @@
     
 }
 /* If the browser window is 720px or smaller*/
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 1024px) {
     #main_area{
         width: 100%;
         box-sizing: border-box;
@@ -120,8 +120,20 @@
     #contact_text, #contact_form{
         width: 90%;
     }
+
+    
 }
 
+/*if the browser window is 1080 px or higher */
+@media only screen and (min-width: 1080px){
+    #contact_form{
+        width: 60%;
+    }
+    #contact_text{
+        width: 40%;
+    }
+    
+}
 
 
 

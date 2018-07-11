@@ -29,13 +29,19 @@
     <?php 
         $url = "http" . (($_SERVER['SERVER_PORT'] == 443) ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     ?>
-
-    <?php if ($url == 'http://localhost/shareposts/pages/contact') {
+    
+    <?php 
+    
+    if ($url == 'http://localhost/shareposts/pages/contact') {
         echo "<div id=\"background_contact\">";
     } else {
         echo "<div class=\"container\">";
     } 
+
+    
     ?>
+    
+    <div class="container">
     
     
     <!-- Main container start -->

@@ -1,6 +1,5 @@
 <?php require_once(APPROOT. '/views/inc/header.php'); ?>
-    <div class="container">
-    
+    <div class="container mt-3">
 
         <div class="row mb-3">
             <div class="col-md-6">

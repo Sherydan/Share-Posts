@@ -1,7 +1,7 @@
 <?php require_once(APPROOT . '/views/inc/header.php'); ?>
 <?php $tzL = generate_timezone_list(); ?>
 
-<div class="container">
+<div class="container mt-3">
     <div class="row">
         <div class="col-12 mb-3">
             <h2>My Settings</h2>

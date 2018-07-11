@@ -8,29 +8,38 @@
     </div>
 
     <div id="contact_form">
-        <form action="" method="post">
+        <form action="<?php echo URLROOT; ?>/pages/contact" method="post">
             <div class="row">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Your Name" required>
+                <div class="col ">
+                    <input type="text" class="form-control" placeholder="Your Name" name="name" required>
                 </div>
-                <div class="col">
-                    <input type="email" name="text" placeholder="Your Email" class="form-control" required>
+                <div class="col ">
+                    <input type="email" name="email" placeholder="Your Email" class="form-control" class="email" required>
                 </div>
             </div>
             <div class="form-control">
-                <input type="text" name="subject" placeholder="Subject" class="form-control" required>
+                <input type="text" name="subject" placeholder="Subject" class="form-control" name="subject" required>
             </div>
 
             <div class="form-control">
                 <label for="messagge">Message</label>
-                <textarea name="messagge" class="form-control" cols="30" rows="10" placeholder="Write Your Message Here" required></textarea>
+                <textarea name="message" class="form-control" cols="30" rows="10" placeholder="Write Your Message Here" required></textarea>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary btn-block">Send</button>
             </div>
+            <p><?php echo !(empty($data['email_err'])) ? $data['email_err'] : '' ?></p>
         </form>
+
+        
+
+        
     </div>
+
+    
 </section>
+
+
 
 
 <?php require_once(APPROOT . '/views/inc/footer.php'); ?>
