@@ -11,14 +11,14 @@
         <form action="<?php echo URLROOT; ?>/pages/contact" method="post">
             <div class="row">
                 <div class="col ">
-                    <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+                    <input type="text" class="form-control p-2" placeholder="Your Name" name="name" required>
                 </div>
                 <div class="col ">
-                    <input type="email" name="email" placeholder="Your Email" class="form-control" class="email" required>
+                    <input type="email" name="email" placeholder="Your Email" class="form-control p-2" class="email" required>
                 </div>
             </div>
             <div class="form-control">
-                <input type="text" name="subject" placeholder="Subject" class="form-control" name="subject" required>
+                <input type="text" name="subject" placeholder="Subject" class="form-control p-2" name="subject" required>
             </div>
 
             <div class="form-control">
