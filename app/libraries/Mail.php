@@ -11,9 +11,6 @@ class Mail {
         
         $mail = new PHPMailer(true);                              
         try {
-
-           
-        
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
@@ -27,8 +24,6 @@ class Mail {
             $mail->addAddress('luis.rainmaker@gmail.com', 'Luis');     // Add a recipient              // Name is optional
             $mail->addReplyTo($data['email']);
            
-
-
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = $data['subject'];

@@ -19,6 +19,9 @@
           <li class="nav-item">
             <a class="nav-link " href="<?php echo URLROOT; ?>/pages/contact">Contact</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link " href="<?php echo URLROOT; ?>/pages/tables">Tables</a>
+          </li>
           
           
         </ul>

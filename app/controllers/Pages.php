@@ -95,8 +95,10 @@ class Pages extends Controller{
 
     }
 
-    
-    
+    public function tables(){
+        $data = [];
+        $this->view('pages/tables', $data);
+    }
    
 }
 ?>
