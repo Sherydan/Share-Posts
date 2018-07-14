@@ -344,6 +344,63 @@
            
         }
 
+        public function recoverPassword(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
+                $data = [
+                    'email' => $_POST['email'],
+                    'user_id' => '',
+                    'token' => '',
+                    'email_err' => '',
+                ];
+
+                if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    if ($this->userModel->getUserByEmail($data['email'])) {
+                        $generator = new RandomStringGenerator;
+                        $tokenLength = 32;
+                        $token = $generator->generate($tokenLength);
+
+                        $user_id = $this->userModel->getUserByEmail($data['email']);
+
+                        $data['user_id'] = $user_id->id;
+                        $data['token'] = $token;
+
+                        if ($this->userModel->recoverPassword($data)) {
+                            $mail = new Mail;
+                           
+
+                            if ($mail->sendRecoveryPassMail($data)) {
+                               $this->view('users/recover_password', $data);
+                            } else {
+                                die('Something went worng');
+                            }
+
+                        } else {
+                            die('Something went worng');
+                        }
+                    }
+                } else {
+                    $data['email_err'] = 'Please enter a valid email';
+                }
+
+                if (!empty($data['email_err'])) {
+
+                    $this->view('users/recover_password', $data);
+                }
+
+            } else {
+                $data = [
+                    'email' => '',
+                    'user_id' => '',
+                    'token' => '',
+                    'mail_err' => ''
+                ];
+
+                $this->view('users/recover_password', $data);
+            }
+        }
+
         
     }
 

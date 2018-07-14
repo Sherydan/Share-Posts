@@ -20,6 +20,7 @@
         $(document).ready(function() {
             $('#posts_table').DataTable( {
                 "pagingType": "full_numbers",
+                //                 indices             nombres
                // "lengthMenu": [[1, 5, 10, -1], [1, 5, 10, "All"]],
                "ajax": {
                    url: "http://localhost/api_rest/api/post/read.php",
@@ -28,16 +29,9 @@
                 "columns":[
                     {data: 'title'},
                     {data: 'body'},
-                    
-
                 ]
-               
             });
-           
         });
-
-
-        
     </script>
 
 <?php require_once(APPROOT. '/views/inc/footer.php'); ?>

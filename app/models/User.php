@@ -66,6 +66,14 @@
             return $row;
         }
 
+        public function getUserByEmail($email){
+            $this->db->query('SELECT users.id FROM users WHERE email = :email');
+            $this->db->bind(':email', $email);
+            $row = $this->db->single();
+
+            return $row;
+        }
+
         public function updateSettings($data){
             
             $this->db->query('UPDATE users_image SET path = :path WHERE user_id = :id; 
@@ -92,6 +100,20 @@
             $row = $this->db->single();
 
             return $row;
+        }
+
+        public function recoverPassword($data = []){
+            $this->db->query('INSERT INTO password_recovery SET user_id = :user_id, recovery_key = :token');
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':token', $data['token']);
+
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        
         }
         
     }

@@ -12,7 +12,7 @@
                     <h2 id="login-title">Login</h2>
 
                     <div class="float-right" id="forgot-pass">
-                        <a href="#">Forgot password?</a>
+                        <a href="<?php echo URLROOT ?>/users/recoverPassword">Forgot password?</a>
                     </div>
 
                 </div>
