@@ -379,6 +379,8 @@
                         } else {
                             die('Something went worng');
                         }
+                    } else {
+                        $data['email_err'] = 'Email not found';
                     }
                 } else {
                     $data['email_err'] = 'Please enter a valid email';
