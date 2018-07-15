@@ -29,6 +29,8 @@
   crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
 
 
     <title><?php echo SITENAME; ?></title>
@@ -42,7 +44,7 @@
     
     <?php 
     
-    if ($url == 'http://localhost/shareposts/pages/contact') {
+    if ($url == ''.URLROOT.'/pages/contact') {
         echo "<div id=\"background_contact\">";
     } else {
         echo "<div class=\"container\">";

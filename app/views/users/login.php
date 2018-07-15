@@ -5,6 +5,7 @@
         <!-- MENSAJES FLASH -->
         <?php flash('user_not_allowed'); ?>
         <?php flash('register_success'); ?>
+        <?php flash('recover_success'); ?>
         <!-- FIN MENSAJES FLASH -->
         <div class="border-aqua">
             <div class="card">

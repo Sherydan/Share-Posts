@@ -115,6 +115,27 @@
 
         
         }
+
+        public function validateToken($token = ''){
+            $this->db->query('SELECT user_id, recovery_key FROM password_recovery WHERE recovery_key = :token');
+            $this->db->bind(':token', $token);
+            $row = $this->db->single();
+
+            return $row;
+        }
+
+        public function updatePassword($data = []){
+            $this->db->query('UPDATE users SET password = :password WHERE users.id = :id_user ; DELETE FROM password_recovery WHERE password_recovery.user_id = :user_id');
+            $this->db->bind(':password', $data['password']);
+            $this->db->bind(':id_user', $data['user_id']);
+            $this->db->bind(':user_id', $data['user_id']);
+
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         
     }
 ?>

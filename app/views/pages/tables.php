@@ -3,10 +3,9 @@
         <table class="table table-striped table-hover" id="posts_table">
         <thead>
             <tr>
-            >
+            
             <th scope="col">Title</th>
             <th scope="col">Body</th>
-           
            
             </tr>
         </thead>

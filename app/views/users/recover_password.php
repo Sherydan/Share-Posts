@@ -2,6 +2,7 @@
 
 <div class="row mt-3 justify-content-lg-center">
     <div class="col col-md-12 col-lg-9 col-12 "> 
+    <?php flash('mail_sent_success'); ?>
         <div class="card">
             <div class="card-body">
                 <form action="<?php echo URLROOT ?>/users/recoverPassword" method="post" class="needs-validation" >

@@ -371,6 +371,7 @@
                            
 
                             if ($mail->sendRecoveryPassMail($data)) {
+                                flash('mail_sent_success', 'Success! Please check your email for instructions');
                                $this->view('users/recover_password', $data);
                             } else {
                                 die('Something went worng');
@@ -402,6 +403,85 @@
                 $this->view('users/recover_password', $data);
             }
         }
+
+        public function recover($token = ''){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                # si hay peticion post
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                $data = [
+                    'password' => $_POST['password'],
+                    'password2' => $_POST['password2'],
+                    'user_id' => $_POST['user_id'],
+                    'valid_token' => 'valid',
+                    'password_err' => '',
+                    'password2_err' => '',
+                    'user_id_err' => ''
+                ];
+
+                if (empty($data['password'])) {
+                    $data['password_err'] = 'Please enter a password';
+                } elseif (strlen($data['password']) < 6) {
+                    $data['password_err'] = 'Password must be at least 6 character long';
+                }
+
+                if (empty($data['password2'])) {
+                    $data['password2_err'] = 'Please re enter your password';
+                } elseif ($data['password2'] != $data['password']) {
+                    $data['password2_err'] = 'Password doesnt match'; 
+                }
+
+                if (empty($data['user_id'])) {
+                    $data['user_id_err'] = 'User not found';
+                }
+
+                if (empty($data['password_err']) && empty($data['password2_err']) && empty($data['user_id_err']) ) {
+                    # sin errores en el form
+                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                    if ($this->userModel->updatePassword($data)) {
+                        flash('recover_success', 'Success! You can now log in');
+                        # con mi helper, redirecciono al login
+                        redirect('users/login');
+                    } else {
+                        die('Something went wrong');
+                    }
+
+                } else {
+                    # errores en el form
+                    $this->view('users/recover', $data);
+                }
+            } else {
+                if (!empty($token)) {
+                    $result = $this->userModel->validateToken($token);
+                    if (!empty($result)) {
+                        # token valido
+                        $data = [
+                            'user_id' => $result->user_id,
+                            'token' => $result->recovery_key,
+                            'valid_token' => 'valid'
+                        ];
+                        $this->view('users/recover', $data);
+                        
+                    } else {
+                        # token invalido
+                        $data = [
+                            'valid_token' => 'invalid'
+                        ];
+                        $this->view('users/recover', $data);
+                    }
+                } else {
+                    # token vacio
+                    redirect('pages/index');
+                }
+
+
+
+            }
+            
+        }
+
+
 
         
     }

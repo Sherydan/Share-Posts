@@ -264,7 +264,7 @@
 <script>
 
     $(document).ready(function () {
-        $('#collapseOne').collapse();
+        $('#collapseOne').collapse('show');
     });
 </script>
 
