@@ -71,7 +71,7 @@
             $this->db->query('DELETE FROM posts WHERE id = :id');
             $this->db->bind(':id', $id);
     
-            # dependiendo si todo sale bien, retorno true o false
+            # dependiendo si todo sale bien, retorno true o false 
             if ($this->db->execute()) {
                 return true;
             } else {
@@ -90,8 +90,6 @@
 
             return $posts;
         }
-
-        
     }
 
 ?>

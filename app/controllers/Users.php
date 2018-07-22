@@ -368,8 +368,6 @@
 
                         if ($this->userModel->recoverPassword($data)) {
                             $mail = new Mail;
-                           
-
                             if ($mail->sendRecoveryPassMail($data)) {
                                 flash('mail_sent_success', 'Success! Please check your email for instructions');
                                $this->view('users/recover_password', $data);

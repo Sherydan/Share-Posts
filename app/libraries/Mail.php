@@ -38,7 +38,7 @@ class Mail {
         } 
    }
 
-   public function sendRecoveryPassMail($data = []){
+   public function sendRecoveryPassMail($data = []){ 
     $mail = new PHPMailer(true);                              
     try {
         $mail->isSMTP();                                      // Set mailer to use SMTP
