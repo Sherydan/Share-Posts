@@ -6,6 +6,7 @@ class Pages extends Controller{
         # creo la propiedad postModel y llamo a la funcion model
         # la cual busca el modelo dentro de la carpeta y lo instancea
         # $this->postModel = $this->model('Post');
+        $this->postModel = $this->model('Post');
     }
 
      # como extendi Controller, puedo llamar a los emtodos view y model
@@ -90,7 +91,9 @@ class Pages extends Controller{
     }
 
     public function tables(){
-        $data = [];
+        $posts = $this->postModel->getPosts();
+            
+        $data = ['posts' => $posts];
         $this->view('pages/tables', $data);
     }
 

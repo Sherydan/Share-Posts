@@ -44,8 +44,6 @@
 
                 <form enctype="multipart/form-data" action="<?php echo URLROOT ?>/pages/images" method="post">
                     <div class="form-group">
-                        
-                        
 
                         <input onchange="document.getElementById('image-to-exif').src = window.URL.createObjectURL(this.files[0])" type="file" accept="image/jpeg"
                             class="form-control-file <?php echo (!empty($data['image_error'])) ? 'is-invalid' : '' ?>" id="uploadImg"
