@@ -25,6 +25,9 @@
           <li class="nav-item">
             <a class="nav-link " href="<?php echo URLROOT; ?>/pages/images">Images</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link " href="<?php echo URLROOT; ?>/pages/reports">Reports</a>
+          </li>
           
           
         </ul>

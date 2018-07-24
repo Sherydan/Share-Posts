@@ -97,6 +97,17 @@ class Pages extends Controller{
         $this->view('pages/tables', $data);
     }
 
+    public function reports(){
+        
+        if ($_SERVER['REQUEST_METHOD']=='POST') {
+            
+        } else {
+            $data = [];
+            $this->view('pages/reports', $data);
+        }
+        
+    }
+
     public function images(){
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
