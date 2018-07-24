@@ -1,5 +1,6 @@
 <?php require_once(APPROOT. '/views/inc/header.php'); ?>
 
+
 <div class="row mt-3 mb-3">
     <div class="col col-md-12 col-lg-12-col-12">
         <div class="accordion" id="accordionReports">
@@ -14,8 +15,9 @@
 
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingUsers" data-parent="#accordionReports">
                     <div class="card-body">
-                        <form action="" method="post" class="mb-3">
-                            <button type="submit" name="listAll" class="btn btn-block btn-primary">List All Users</button>
+                        <form action="" method="post" class="needs-validation mb-3" target="_blank" novalidate>
+                            <button type="submit" name="listAllUsers" class="btn btn-block btn-primary">List All Users</button>
+                            
                         </form>
                         <p>
                             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseId" aria-expanded="false" aria-controls="collapseId"
@@ -33,10 +35,11 @@
                                 <form action="" method="post">
                                     <div class="row">
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="User Name" name="userName">
+                                            <input type="number" class="form-control" placeholder="User ID" name="listPostByUserID">
+                                            
                                         </div>
                                         <div class="col">
-                                            <input type="submit" value="Submit" class="btn btn-primary" name="listByName">
+                                            <input type="submit" value="Submit" class="btn btn-primary" name="listByID">
                                         </div>
                                     </div>
                                 </form>
@@ -45,13 +48,13 @@
 
                         <div class="collapse" id="collapseName">
                             <div class="card card-body">
-                                <form action="" method="post">
+                                <form action="" method="post" target="_blank">
                                     <div class="row">
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="User ID" name="userID">
+                                            <input type="text" class="form-control" placeholder="User Name" name="userName">
                                         </div>
                                         <div class="col">
-                                            <input type="submit" value="Submit" class="btn btn-primary" name="ListByID">
+                                            <input type="submit" value="Submit" class="btn btn-primary" name="ListByName">
                                         </div>
                                     </div>
                                 </form>
@@ -92,7 +95,7 @@
                                                 <input type="text" class="form-control" placeholder="User Name" name="userName">
                                             </div>
                                             <div class="col">
-                                                <input type="submit" value="Submit" class="btn btn-primary" name="listByUser">
+                                                <input type="submit" value="Submit" class="btn btn-primary" name="listByUserName">
                                             </div>
                                         </div>
                                     </form>
@@ -108,13 +111,13 @@
 <script>
     $(document).ready(function () {
         $('#collId').on('click', function () {
-            $('#collapseName').collapse('hide');
             $('#collapseId').collapse('show');
+            $('#collapseName').collapse('hide');
         });
 
         $('#collName').on('click', function () {
-            $('#collapseName').collapse('show');
             $('#collapseId').collapse('hide');
+            $('#collapseName').collapse('show');
         });
     });
 

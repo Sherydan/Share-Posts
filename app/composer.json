@@ -1,6 +1,8 @@
 {
     "require": {
         "phpmailer/phpmailer": "^6.0",
-        "intervention/image": "^2.4"
+        "intervention/image": "^2.4",
+        "spipu/html2pdf": "^5.1"
+        
     }
 }

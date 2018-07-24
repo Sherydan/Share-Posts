@@ -57,6 +57,19 @@
             }
         }
 
+        public function getUsers(){
+            $this->db->query('SELECT * FROM users');
+            $data = $this->db->resultSet();
+            return $data;
+        }
+
+        public function getUser($name){
+            $this->db->query('SELECT * FROM users WHERE name LIKE :name');
+            $this->db->bind(':name', "%$name%");
+            $data = $this->db->resultSet();
+            return $data;
+        }
+
         public function getUserById($id){
             $this->db->query('SELECT * FROM users WHERE id = :id');
             $this->db->bind(':id', $id);

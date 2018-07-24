@@ -7,6 +7,7 @@ class Pages extends Controller{
         # la cual busca el modelo dentro de la carpeta y lo instancea
         # $this->postModel = $this->model('Post');
         $this->postModel = $this->model('Post');
+        $this->userModel = $this->model('User');
     }
 
      # como extendi Controller, puedo llamar a los emtodos view y model
@@ -98,11 +99,60 @@ class Pages extends Controller{
     }
 
     public function reports(){
-        
         if ($_SERVER['REQUEST_METHOD']=='POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'input_user_name_error' => '',
+                'no_data_error' => ''
+            ];
+
+            if (isset($_POST['listAllUsers'])) {
+                # si el reporte que se requiere es listar todos los post
+                # crear reporte
+                $users = $this->userModel->getUsers();
+                if (!empty($users)) {
+                    # si tengo registros, proceso el reporte
+                    $report = new Report;
+                    $report->listAllUsers($users);
+
+                } else{
+                    $data['no_data_error'] = 'No data found';
+                    $this->view('pages/reports', $data);
+                }
+                
+            }
+
+            
+
+            if (isset($_POST['ListByName'])) {
+                # si el reporte que se requiere es listar todos los post
+                # creados por tal usuario
+                if (empty($_POST['userName'])) {
+                    # en caso que el input este vacio
+                    $data['input_user_name_error'] = 'User Name cant be empty';
+                    # cargo vista y muestro error
+                    $this->view('pages/reports', $data);
+                }
+
+                if (empty($data['input_user_name_error'])) {
+                    # en caso que no hayan errores, proceso la peticion
+                    $user = $this->userModel->getUser($_POST['userName']);
+                    if (!empty($user)) {
+                        $report = new Report;
+                        $report->listUsersByName($user);
+                    } else {
+                        $data['no_data_error'] = 'No data found';
+                        $this->view('pages/reports', $data);
+                    }
+                }
+            }
             
         } else {
-            $data = [];
+            $data = [
+                'input_error' => '',
+                'no_data_error' => ''
+            ];
             $this->view('pages/reports', $data);
         }
         
