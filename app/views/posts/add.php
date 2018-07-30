@@ -3,19 +3,19 @@
     <div class="row">
         <div class="col">
             <h2>Add Post</h2>
-            <form action="<?php echo URLROOT; ?>/posts/add" method="post">
-                <div class="form-row ">
+            <form action="<?php echo URLROOT; ?>/posts/add" method="post" id="frmAddPost" class="needs-validation">
+                <div class="form-row">
                     <div class="col-md-8 col-sm-12 p-2 bg-white mb-3" id="main-form-add">
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" name="title" id="title" class="form-control <?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['title']; ?>">
-                            <span class="invalid-feedback"><?php echo $data['title_err']; ?></span>
+                            <span class="invalid-feedback"><?php echo !empty($data['title_err']) ? $data['title_err'] : '' ; ?></span>
                         </div>
 
                         <div class="form-group">
                             <label for="body">Body</label>
                             <textarea name="body" id="body" cols="30" rows="10" class="form-control <?php echo (!empty($data['body_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['body']; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $data['body_err']; ?></span>
+                            <span class="invalid-feedback"><?php echo !empty($data['body_err']) ? $data['body_err'] : '' ; ?></span>
                         </div>
                     </div>
 
@@ -58,5 +58,7 @@
 
     </div>
 </div>
+
+
 
 <?php require_once(APPROOT . '/views/inc/footer.php'); ?>

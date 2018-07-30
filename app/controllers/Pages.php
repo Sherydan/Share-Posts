@@ -104,6 +104,7 @@ class Pages extends Controller{
 
             $data = [
                 'input_user_name_error' => '',
+                'input_user_id_error' => '',
                 'no_data_error' => ''
             ];
 
@@ -122,8 +123,6 @@ class Pages extends Controller{
                 }
                 
             }
-
-            
 
             if (isset($_POST['ListByName'])) {
                 # si el reporte que se requiere es listar todos los post
@@ -144,6 +143,25 @@ class Pages extends Controller{
                     } else {
                         $data['no_data_error'] = 'No data found';
                         $this->view('pages/reports', $data);
+                    }
+                }
+            }
+
+            if (isset($_POST['listByID'])) {
+                if(empty($_POST['listPostByUserID'])){
+                    $data['input_user_id_error'] = 'User id cant be empty';
+                    $this->view('pages/reports', $data);
+                }
+
+                if (empty($data['input_user_id_error'])) {
+                    $user = $this->userModel->getUserById($_POST['listPostByUserID']);
+
+                    if (!empty($user)) {
+                        $report = new Report;
+                        $report->listUsersById($user);
+                    } else {
+                        $data['no_data_error'] = 'No Data Found';
+                        $this->view('pages/reports');
                     }
                 }
             }

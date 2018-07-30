@@ -1,7 +1,7 @@
 <?php require_once(APPROOT . '/views/inc/header.php'); ?>
 
-<div class="row mt-5">
-    <div class="col-md-6 mx-auto">
+<div class="row mt-5 justify-content-lg-center justify-content-md-center">
+    <div class="col col-md-8 col-lg-6 col-12">
         <!-- MENSAJES FLASH -->
         <?php flash('user_not_allowed'); ?>
         <?php flash('register_success'); ?>
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="card-body ">
-                    <form action="<?php echo URLROOT; ?>/users/login" method="post" class="needs-validation" novalidate>
+                    <form action="<?php echo URLROOT; ?>/users/login" method="post" class="needs-validation" id="frmLogin" novalidate>
                         
                         <label for="email" class="sr-only">Email</label>
                         <div class="input-group mb-4 mr-sm-2">
@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <input name="email" type="email" class="form-control form-control-lg <?php echo  (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
-                                placeholder="Email" value="<?php echo $data['email']; ?>" required>
+                                placeholder="Email" value="<?php echo $data['email']; ?>" id="email" required>
                             <div class="invalid-feedback">
                                 <?php echo $data['email_err']; ?>
                             </div>
@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <input name="password" type="password" class="form-control form-control-lg <?php echo  (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>"
-                                placeholder="Password" value="<?php echo $data['password']; ?>" required>
+                                placeholder="Password" value="<?php echo $data['password']; ?>" id="password" required>
                             <div class="invalid-feedback">
                                 <?php echo $data['password_err']; ?>
                             </div>
@@ -79,6 +79,43 @@
 
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('#frmLogin').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true
+                }
+
+                
+            },
+            messages:{
+                email: {
+                    required: 'Please enter your email',
+                },
+                password: {
+                    required: 'Please enter your password'
+                }
+            },
+            errorClass: "invalid-feedback",
+            
+            highlight: function(element, errorClass) {
+            var $element = $(element);
+            $element.parent().addClass(errorClass);
+            $element.parent().css('font-size', '1rem');
+            },
+            unhighlight: function(element, errorClass) {
+            var $element = $(element);
+            $element.parent().removeClass(errorClass);
+            }
+        });
+    });
+</script>
 
 
 

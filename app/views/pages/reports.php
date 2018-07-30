@@ -15,8 +15,8 @@
 
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingUsers" data-parent="#accordionReports">
                     <div class="card-body">
-                        <form action="" method="post" class="needs-validation mb-3" target="_blank" novalidate>
-                            <button type="submit" name="listAllUsers" class="btn btn-block btn-primary">List All Users</button>
+                        <form action="" method="post" class="needs-validation mb-3" target="_blank" novalidate id="frmListAllUsers">
+                            <button type="submit" name="listAllUsers" class="btn btn-block btn-primary" id="btnListAllUsers">List All Users</button>
                             
                         </form>
                         <p>
@@ -32,7 +32,7 @@
                         </p>
                         <div class="collapse" id="collapseId">
                             <div class="card card-body">
-                                <form action="" method="post">
+                                <form action="" method="post" target="_blank">
                                     <div class="row">
                                         <div class="col">
                                             <input type="number" class="form-control" placeholder="User ID" name="listPostByUserID">

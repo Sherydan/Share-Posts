@@ -40,6 +40,7 @@
 
     <?php 
         $url = "http" . (($_SERVER['SERVER_PORT'] == 443) ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    
     ?>
     
     <?php 

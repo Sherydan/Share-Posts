@@ -1,8 +1,8 @@
 <?php require_once(APPROOT . '/views/inc/header.php'); ?>
 
 
-<div class="row mt-5">
-    <div class="col-md-6 mx-auto">
+<div class="row mt-5 justify-content-lg-center justify-content-md-center">
+    <div class=" col col-md-8 col-lg-6 col-12">
         <div class="border-aqua">
             <div class="card">
                 <div class="card-header bg-aqua">
@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="<?php echo URLROOT; ?>/users/register" method="POST" novalidate>
+                    <form action="<?php echo URLROOT; ?>/users/register" method="POST" id="frmRegister" class="needs-validation">
                         <label for="name" class="sr-only">Name</label>
                         <div class="input-group mb-4 mr-sm-2">
                             <div class="input-group-prepend">
@@ -19,8 +19,8 @@
                                     <span class="fa fa-user"></span>
                                 </div>
                             </div>
-                            <input name="name" type="text" class="form-control form-control-lg <?php echo  (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>"
-                                 placeholder="Name" value="<?php echo $data['name']; ?>" required>
+                            <input name="name" type="text" class="form-control  <?php echo  (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>"
+                                 placeholder="Name" value="<?php echo $data['name']; ?>" required id="name">
                             <div class="invalid-feedback">
                                 <?php echo $data['name_err']; ?>
                             </div>
@@ -33,8 +33,8 @@
                                     <span class="fa fa-envelope"></span>
                                 </div>
                             </div>
-                            <input name="email" type="email" class="form-control form-control-lg <?php echo  (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
-                                 placeholder="Email" value="<?php echo $data['email']; ?>" required>
+                            <input name="email" type="email" class="form-control  <?php echo  (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
+                                 placeholder="Email" value="<?php echo $data['email']; ?>" id="email" required>
                             <div class="invalid-feedback">
                                 <?php echo $data['email_err']; ?>
                             </div>
@@ -47,8 +47,8 @@
                                     <span class="fa fa-key"></span>
                                 </div>
                             </div>
-                            <input name="password" type="password" class="form-control form-control-lg <?php echo  (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>"
-                                 placeholder="Password" value="<?php echo $data['password']; ?>" required>
+                            <input name="password" type="password" class="form-control  <?php echo  (!empty($data['password_err'])) ? 'is-invalid' : ''; ?> "
+                                 placeholder="Password" value="<?php echo $data['password']; ?>" required id="password">
                             <div class="invalid-feedback">
                                 <?php echo $data['password_err']; ?>
                             </div>
@@ -61,8 +61,8 @@
                                     <span class="fa fa-key"></span>
                                 </div>
                             </div>
-                            <input name="confirm_password" type="password" class="form-control form-control-lg <?php echo  (!empty($data['confirm_password_err'])) ? 'is-invalid' : ''; ?>"
-                                 placeholder="Confirm password" value="<?php echo $data['confirm_password']; ?>" required>
+                            <input name="confirm_password" type="password" class="form-control  <?php echo  (!empty($data['confirm_password_err'])) ? 'is-invalid' : ''; ?>"
+                                 placeholder="Confirm password" value="<?php echo $data['confirm_password']; ?>" required id="confirm_password">
                             <div class="invalid-feedback">
                                 <?php echo $data['confirm_password_err']; ?>
                             </div>
@@ -85,5 +85,65 @@
     </div>
 </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("#frmRegister").validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                confirm_password: {
+                    required: true,
+                    minlength: 6,
+                    equalTo: "#password"
+                }
+
+            },
+            messages: {
+                name: {
+                    required: 'Please enter a name'
+                },
+                email: {
+                    required: 'Please enter your email'
+                },
+                password: {
+                    required: 'Please enter a password',
+                    minlength: 'Password must be at least 6 characters long'
+                },
+                confirm_password: {
+                    required: 'Please re enter your password',
+                    minlength: 'Password must be at least 6 characters long',
+                    equalTo: 'Passwords doesnt match'
+                }
+            },
+            errorClass: "invalid-feedback",
+
+            highlight: function(element, errorClass) {
+            var $element = $(element);
+            // Add the red outline.
+            $element.parent().addClass(errorClass);
+            //$element.parent().css('font-size', '1rem');
+            // Add the red cross.
+            // $element.siblings(".error_status").addClass("check");
+            },
+            unhighlight: function(element, errorClass) {
+            var $element = $(element);
+            // Remove the red cross.
+            // $element.siblings(".error_status").removeClass("check");
+            // Remove the red outline.
+            $element.parent().removeClass(errorClass);
+            }
+        });
+    });
+</script>
 
 <?php require_once(APPROOT . '/views/inc/footer.php'); ?>
